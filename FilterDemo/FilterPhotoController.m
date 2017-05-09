@@ -17,6 +17,7 @@
 #import <Photos/Photos.h>
 
 @interface FilterPhotoController ()<UICollectionViewDelegate, UICollectionViewDataSource, TNFilterColorViewDelegate, TNFilterTextViewDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *aaa;
 @property (nonatomic, strong) GPUImageView *imageView;
 @property (nonatomic, strong) UIImageView *containView;
 @property (nonatomic, strong) UIView *editArea;
@@ -53,11 +54,14 @@
     [[GPUImageContext sharedImageProcessingContext].framebufferCache purgeAllUnassignedFramebuffers];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"选择滤镜";
-    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveImage)], [[UIBarButtonItem alloc] initWithTitle:@"重置" style:UIBarButtonItemStylePlain target:self action:@selector(resetFilter)]];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"选择照片" style:UIBarButtonItemStylePlain target:self action:@selector(choosePhoto)];
+    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveImage)], [[UIBarButtonItem alloc] initWithTitle:@"重置" style:UIBarButtonItemStylePlain target:self action:@selector(resetFilter)], [[UIBarButtonItem alloc] initWithTitle:@"照片" style:UIBarButtonItemStylePlain target:self action:@selector(choosePhoto)]];
     
     self.view.backgroundColor = [UIColor whiteColor];
     if (self.photo == nil) {
@@ -271,6 +275,9 @@
     __weak typeof(&*image)weakImage = image;
     [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
         __strong typeof (&*weakImage)strongImage = weakImage;
+        if (strongImage == nil) {
+            NSLog(@"MonkeyHengLog: description === %@", @"");
+        }
         PHAssetChangeRequest *changeAssetRequest = [PHAssetChangeRequest creationRequestForAssetFromImage:strongImage];
         PHAssetCollection *targetCollection = [[PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil]lastObject];
         PHAssetCollectionChangeRequest *changeCollectionRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:targetCollection];

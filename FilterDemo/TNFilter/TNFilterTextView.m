@@ -68,7 +68,7 @@
     [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editText:)]];
     
     self.textLabel = [[TNTextLabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds) * 2, CGRectGetWidth([UIScreen mainScreen].bounds) * 2 / 4)];
-    self.textLabel.font = [UIFont systemFontOfSize:80.0];
+    self.textLabel.font = [UIFont systemFontOfSize:40.0];
     self.textLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.0];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.numberOfLines = 0;
