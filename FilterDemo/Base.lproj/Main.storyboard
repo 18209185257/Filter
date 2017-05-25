@@ -12,7 +12,7 @@
         <!--选择模式-->
         <scene sceneID="w0P-eL-Psr">
             <objects>
-                <viewController id="oOP-Qj-OQc" sceneMemberID="viewController">
+                <viewController id="oOP-Qj-OQc" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L6Z-r2-wwj"/>
                         <viewControllerLayoutGuide type="bottom" id="K0Z-vT-kwt"/>
@@ -30,7 +30,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="照片"/>
                                 <connections>
-                                    <segue destination="hUJ-mI-jGW" kind="push" id="axB-O8-qfF"/>
+                                    <action selector="showPhoto:" destination="oOP-Qj-OQc" eventType="touchUpInside" id="KNN-ki-bXu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEO-Qn-Ecn">
@@ -40,14 +40,14 @@
                                     <constraint firstAttribute="height" constant="50" id="pCw-bJ-7YL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="相机"/>
+                                <state key="normal" title="人脸识别"/>
                                 <connections>
                                     <segue destination="91c-YW-4Ib" kind="push" id="8cx-al-CM5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7w-J1-VdN">
                                 <rect key="frame" x="0.0" y="102" width="375" height="50"/>
-                                <color key="backgroundColor" red="0.94117647059999998" green="0.43137254899999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.90980392160000001" green="0.43921568630000002" blue="0.019607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="3iQ-hf-47e"/>
                                 </constraints>
@@ -86,7 +86,7 @@
                         <viewControllerLayoutGuide type="bottom" id="T1q-H2-Dc1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="POQ-TI-1l8">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -94,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WUf-Cj-tNi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="665" y="-512"/>
+            <point key="canvasLocation" x="664.79999999999995" y="-512.29385307346331"/>
         </scene>
         <!--拍摄视频-->
         <scene sceneID="DBG-hr-lVT">
@@ -113,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f9V-Zu-zME" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="665" y="175"/>
+            <point key="canvasLocation" x="664.79999999999995" y="197.45127436281859"/>
         </scene>
         <!--科大讯飞示例-->
         <scene sceneID="LDU-4l-VJc">
@@ -194,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTv-RE-uaV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="665" y="869"/>
+            <point key="canvasLocation" x="665" y="972"/>
         </scene>
         <!--Text Input Controller-->
         <scene sceneID="Q8w-w9-Vzb">

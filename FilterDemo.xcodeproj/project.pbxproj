@@ -24,6 +24,7 @@
 		7E3E64CA1EAD8B7800DFC04A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3E64C91EAD8B7800DFC04A /* AppDelegate.m */; };
 		7E3E64D01EAD8B7800DFC04A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E3E64CE1EAD8B7800DFC04A /* Main.storyboard */; };
 		7E3E64D21EAD8B7800DFC04A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E3E64D11EAD8B7800DFC04A /* Assets.xcassets */; };
+		7E51D2B41ECB07CA00606709 /* TNGPUEyeLagerFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E51D2B31ECB07CA00606709 /* TNGPUEyeLagerFilter.m */; };
 		7E686C1C1EC15A2D00CFFE6D /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E686C1B1EC15A2D00CFFE6D /* CoreVideo.framework */; };
 		7E686C201EC15A4F00CFFE6D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E686C1D1EC15A4F00CFFE6D /* CoreMedia.framework */; };
 		7E686C211EC15A4F00CFFE6D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E686C1E1EC15A4F00CFFE6D /* CoreMotion.framework */; };
@@ -32,6 +33,7 @@
 		7E686C2D1EC15B7800CFFE6D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFA8A291EC1541D0038E1EF /* libc++.tbd */; };
 		7E686C2F1EC15B7F00CFFE6D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E686C2E1EC15B7F00CFFE6D /* libz.tbd */; };
 		7E686C321EC162F400CFFE6D /* FilterCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E686C311EC162F400CFFE6D /* FilterCameraController.m */; };
+		7E7A19CF1ED6B22E002D2A57 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A19CE1ED6B22E002D2A57 /* ViewController.m */; };
 		7E94D2851EAEE4A500C884D8 /* TNFilterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E94D2841EAEE4A500C884D8 /* TNFilterManager.m */; };
 		7E94D2881EAEF69300C884D8 /* TNFilterSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E94D2871EAEF69300C884D8 /* TNFilterSlider.m */; };
 		7E94D28B1EAEF76F00C884D8 /* TNFilterColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E94D28A1EAEF76F00C884D8 /* TNFilterColorView.m */; };
@@ -39,6 +41,9 @@
 		7E9611FC1EAD995500D30B0A /* FilterPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9611FB1EAD995500D30B0A /* FilterPhotoController.m */; };
 		7EC03FFF1EB046E1000A7B88 /* TNFilterTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC03FFE1EB046E1000A7B88 /* TNFilterTextView.m */; };
 		7EC040021EB1DAFB000A7B88 /* TextInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC040011EB1DAFB000A7B88 /* TextInputController.m */; };
+		7EEE10271EC2A9E80070012D /* TNFaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EEE10261EC2A9E80070012D /* TNFaceModel.m */; };
+		7EEE10291EC2D4AD0070012D /* TNFaceInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EEE10281EC2D4AD0070012D /* TNFaceInfo.plist */; };
+		7EEE102C1EC2D6550070012D /* TNFaceEyeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EEE102B1EC2D6550070012D /* TNFaceEyeView.m */; };
 		7EFA8A2E1EC154390038E1EF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFA8A2D1EC154390038E1EF /* SystemConfiguration.framework */; };
 		7EFA8A301EC154420038E1EF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFA8A2F1EC154420038E1EF /* MobileCoreServices.framework */; };
 		7EFA8A321EC1544B0038E1EF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFA8A311EC1544B0038E1EF /* CoreGraphics.framework */; };
@@ -83,6 +88,8 @@
 		7E3E64CF1EAD8B7800DFC04A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7E3E64D11EAD8B7800DFC04A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E3E64D61EAD8B7800DFC04A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E51D2B21ECB07CA00606709 /* TNGPUEyeLagerFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNGPUEyeLagerFilter.h; sourceTree = "<group>"; };
+		7E51D2B31ECB07CA00606709 /* TNGPUEyeLagerFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNGPUEyeLagerFilter.m; sourceTree = "<group>"; };
 		7E686C1B1EC15A2D00CFFE6D /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		7E686C1D1EC15A4F00CFFE6D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		7E686C1E1EC15A4F00CFFE6D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -95,6 +102,9 @@
 		7E686C2E1EC15B7F00CFFE6D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		7E686C301EC162F400CFFE6D /* FilterCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterCameraController.h; sourceTree = "<group>"; };
 		7E686C311EC162F400CFFE6D /* FilterCameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterCameraController.m; sourceTree = "<group>"; };
+		7E7A19CD1ED6B22E002D2A57 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7E7A19CE1ED6B22E002D2A57 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7E8B5C731EC557260045EA22 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		7E94D2831EAEE4A500C884D8 /* TNFilterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNFilterManager.h; sourceTree = "<group>"; };
 		7E94D2841EAEE4A500C884D8 /* TNFilterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNFilterManager.m; sourceTree = "<group>"; };
 		7E94D2861EAEF69300C884D8 /* TNFilterSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNFilterSlider.h; sourceTree = "<group>"; };
@@ -108,6 +118,11 @@
 		7EC03FFE1EB046E1000A7B88 /* TNFilterTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNFilterTextView.m; sourceTree = "<group>"; };
 		7EC040001EB1DAFB000A7B88 /* TextInputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextInputController.h; sourceTree = "<group>"; };
 		7EC040011EB1DAFB000A7B88 /* TextInputController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextInputController.m; sourceTree = "<group>"; };
+		7EEE10251EC2A9E80070012D /* TNFaceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNFaceModel.h; sourceTree = "<group>"; };
+		7EEE10261EC2A9E80070012D /* TNFaceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNFaceModel.m; sourceTree = "<group>"; };
+		7EEE10281EC2D4AD0070012D /* TNFaceInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TNFaceInfo.plist; sourceTree = "<group>"; };
+		7EEE102A1EC2D6550070012D /* TNFaceEyeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNFaceEyeView.h; sourceTree = "<group>"; };
+		7EEE102B1EC2D6550070012D /* TNFaceEyeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNFaceEyeView.m; sourceTree = "<group>"; };
 		7EFA8A291EC1541D0038E1EF /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		7EFA8A2B1EC154300038E1EF /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		7EFA8A2D1EC154390038E1EF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -147,6 +162,13 @@
 			children = (
 				7E3000801EC1A3490099D13D /* TNFaceTools.h */,
 				7E3000811EC1A3490099D13D /* TNFaceTools.m */,
+				7EEE10251EC2A9E80070012D /* TNFaceModel.h */,
+				7EEE10261EC2A9E80070012D /* TNFaceModel.m */,
+				7EEE102A1EC2D6550070012D /* TNFaceEyeView.h */,
+				7EEE102B1EC2D6550070012D /* TNFaceEyeView.m */,
+				7E51D2B21ECB07CA00606709 /* TNGPUEyeLagerFilter.h */,
+				7E51D2B31ECB07CA00606709 /* TNGPUEyeLagerFilter.m */,
+				7EEE10281EC2D4AD0070012D /* TNFaceInfo.plist */,
 			);
 			path = TNFace;
 			sourceTree = "<group>";
@@ -253,10 +275,13 @@
 				7E9611FB1EAD995500D30B0A /* FilterPhotoController.m */,
 				7E686C301EC162F400CFFE6D /* FilterCameraController.h */,
 				7E686C311EC162F400CFFE6D /* FilterCameraController.m */,
+				7E7A19CD1ED6B22E002D2A57 /* ViewController.h */,
+				7E7A19CE1ED6B22E002D2A57 /* ViewController.m */,
 				7EC040001EB1DAFB000A7B88 /* TextInputController.h */,
 				7E94D28F1EAF46C100C884D8 /* Launch Screen.storyboard */,
 				7E3E64CE1EAD8B7800DFC04A /* Main.storyboard */,
 				7EC040011EB1DAFB000A7B88 /* TextInputController.m */,
+				7E8B5C731EC557260045EA22 /* PrefixHeader.pch */,
 				7E3E64D11EAD8B7800DFC04A /* Assets.xcassets */,
 				7E3E64D61EAD8B7800DFC04A /* Info.plist */,
 				7E3E64C51EAD8B7800DFC04A /* Supporting Files */,
@@ -385,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E3E64D21EAD8B7800DFC04A /* Assets.xcassets in Resources */,
+				7EEE10291EC2D4AD0070012D /* TNFaceInfo.plist in Resources */,
 				7E94D2901EAF46C100C884D8 /* Launch Screen.storyboard in Resources */,
 				7E3E64D01EAD8B7800DFC04A /* Main.storyboard in Resources */,
 			);
@@ -446,10 +472,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E3000AE1EC1C1D30099D13D /* IFlyFaceImage.m in Sources */,
+				7EEE102C1EC2D6550070012D /* TNFaceEyeView.m in Sources */,
 				7EC03FFF1EB046E1000A7B88 /* TNFilterTextView.m in Sources */,
 				7EC040021EB1DAFB000A7B88 /* TextInputController.m in Sources */,
 				7E3000AA1EC1C1D30099D13D /* CanvasView.m in Sources */,
 				7E3000AB1EC1C1D30099D13D /* CaptureManager.m in Sources */,
+				7E7A19CF1ED6B22E002D2A57 /* ViewController.m in Sources */,
+				7E51D2B41ECB07CA00606709 /* TNGPUEyeLagerFilter.m in Sources */,
 				7E3000821EC1A3490099D13D /* TNFaceTools.m in Sources */,
 				7E94D28B1EAEF76F00C884D8 /* TNFilterColorView.m in Sources */,
 				7E3000BA1EC1C2950099D13D /* UIImage+compress.m in Sources */,
@@ -462,6 +491,7 @@
 				7E94D2851EAEE4A500C884D8 /* TNFilterManager.m in Sources */,
 				7E3E64C71EAD8B7800DFC04A /* main.m in Sources */,
 				7E3000B01EC1C1D30099D13D /* UIImage+Extensions.m in Sources */,
+				7EEE10271EC2A9E80070012D /* TNFaceModel.m in Sources */,
 				7E9611FC1EAD995500D30B0A /* FilterPhotoController.m in Sources */,
 				7E3000B11EC1C1D30099D13D /* PermissionDetector.m in Sources */,
 				7E686C321EC162F400CFFE6D /* FilterCameraController.m in Sources */,
@@ -581,6 +611,7 @@
 			baseConfigurationReference = 6FAB2E840DC6963849918A8C /* Pods-FilterDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				DEVELOPMENT_TEAM = 6AUL2A4AE9;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -588,6 +619,8 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/lib",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/FilterDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = FilterDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -602,6 +635,7 @@
 			baseConfigurationReference = 46F96600C58DE9AC88DB34F4 /* Pods-FilterDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				DEVELOPMENT_TEAM = 6AUL2A4AE9;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -609,6 +643,8 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/lib",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/FilterDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = FilterDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

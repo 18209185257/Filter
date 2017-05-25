@@ -15,8 +15,16 @@
 #import "TextInputController.h"
 #import "TZImagePickerController.h"
 #import <Photos/Photos.h>
+#import <iflyMSC/IFlyFaceRequest.h>
+#import <iflyMSC/IFlySpeechConstant.h>
+#import <iflyMSC/IFlySpeechError.h>
+#import <iflyMSC/IFlyFaceRequestDelegate.h>
+#import "UIImage+Extensions.h"
+#import <JSONKit.h>
+#import "TNFaceModel.h"
+#import <SVProgressHUD.h>
 
-@interface FilterPhotoController ()<UICollectionViewDelegate, UICollectionViewDataSource, TNFilterColorViewDelegate, TNFilterTextViewDelegate>
+@interface FilterPhotoController ()<UICollectionViewDelegate, UICollectionViewDataSource, TNFilterColorViewDelegate, TNFilterTextViewDelegate, IFlyFaceRequestDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *aaa;
 @property (nonatomic, strong) GPUImageView *imageView;
 @property (nonatomic, strong) UIImageView *containView;
@@ -35,6 +43,11 @@
 @property (nonatomic, strong) NSIndexPath *selectedIndex;
 @property (nonatomic, assign) NSInteger segmentIndex;
 @property (nonatomic, strong) NSMutableArray<TNFilterTextView *> *textViews;
+
+@property (nonatomic, strong) IFlyFaceRequest *iFlySpFaceRequest;
+@property (nonatomic, strong) TNFaceModel *faceModel;
+@property (nonatomic, strong) UIView *borderView;
+
 @end
 
 @implementation FilterPhotoController {
@@ -48,6 +61,10 @@
     GPUImageHueFilter *hue; // HUE
     GPUImageRGBFilter *rgb; // 颜色
     GPUImageFilterPipeline *pipeline; // 组合滤镜
+    
+    
+    GPUImageBulgeDistortionFilter *leftEyeBulge; // 凸起失帧
+    GPUImageBulgeDistortionFilter *rightEyeBulge; // 凸起失帧
 }
 
 - (void)dealloc {
@@ -61,22 +78,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveImage)], [[UIBarButtonItem alloc] initWithTitle:@"重置" style:UIBarButtonItemStylePlain target:self action:@selector(resetFilter)], [[UIBarButtonItem alloc] initWithTitle:@"照片" style:UIBarButtonItemStylePlain target:self action:@selector(choosePhoto)]];
+    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveImage)], [[UIBarButtonItem alloc] initWithTitle:@"重置" style:UIBarButtonItemStylePlain target:self action:@selector(resetFilter)]];
     
     self.view.backgroundColor = [UIColor whiteColor];
     if (self.photo == nil) {
         self.photo = [UIImage imageNamed:@"Model"];
     }
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
     [self initSubViews];
     [self layoutSubView];
     [self setupFilters];
+    
+    self.iFlySpFaceRequest = [IFlyFaceRequest sharedInstance];
+    [self.iFlySpFaceRequest setDelegate:self];
+    [self.iFlySpFaceRequest setParameter:[IFlySpeechConstant FACE_ALIGN] forKey:[IFlySpeechConstant FACE_SST]];
+    [self.iFlySpFaceRequest setParameter:USER_APPID forKey:[IFlySpeechConstant APPID]];
+    NSData* imgData = [self.photo compressedData];
+    NSLog(@"reg image data length: %lu",(unsigned long)[imgData length]);
+    [self.iFlySpFaceRequest sendRequest:imgData];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD showWithStatus:@"识别中..."];
 }
 
 - (void)initSubViews {
 //    @"亮度", @"对比度", @"饱和度", @"色温", @"高光", @"阴影", @"色阶", @"HUE", @"RGB"
-    self.dataSource = @[@"亮度", @"对比度", @"饱和度", @"色温", @"高光", @"阴影", @"颜色", @"文字"];
-    self.iconNames = @[@"brightness", @"contrast", @"saturation", @"temp", @"hightlight", @"shadow", @"color", @"text"];
+    self.dataSource = @[@"亮度", @"对比度", @"饱和度", @"色温", @"高光", @"阴影", @"颜色", @"文字", @"大眼"];
+    self.iconNames = @[@"brightness", @"contrast", @"saturation", @"temp", @"hightlight", @"shadow", @"color", @"text", @"eye"];
     self.effectNames = @[@"原图", @"背光", @"暗化", @"多云", @"阴影", @"日落", @"夜景", @"风景"];
     self.textViews = [NSMutableArray array];
     self.selectedIndex = 0;
@@ -145,9 +173,16 @@
     [self.editArea addSubview:self.containView];
     
     self.imageView = [[GPUImageView alloc] init];
+    self.imageView.fillMode = kGPUImageFillModePreserveAspectRatio;
     self.imageView.userInteractionEnabled = YES;
     [self.containView addSubview:self.imageView];
     [self.imageView setBackgroundColorRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+    
+    self.borderView = [[UIView alloc] init];
+    self.borderView.backgroundColor = [UIColor clearColor];
+    self.borderView.layer.borderColor = [UIColor blueColor].CGColor;
+    self.borderView.layer.borderWidth = 4.0;
+    [self.imageView addSubview:self.borderView];
 }
 
 - (void)layoutSubView {
@@ -215,6 +250,18 @@
         make.right.equalTo(self.containView.mas_right);
         make.bottom.equalTo(self.containView.mas_bottom);
     }];
+    
+    [self.borderView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.imageView.mas_top);
+//        make.left.equalTo(self.imageView.mas_left);
+//        make.right.equalTo(self.imageView.mas_right);
+//        make.height.equalTo(self.borderView.mas_width);
+        
+        make.centerX.equalTo(self.imageView.mas_centerX);
+        make.centerY.equalTo(self.imageView.mas_centerY);
+        make.width.equalTo(self.imageView.mas_width);
+        make.height.equalTo(self.borderView.mas_width);
+    }];
 }
 
 - (void)setupFilters {
@@ -227,7 +274,18 @@
     hightlightShadow = [[GPUImageHighlightShadowFilter alloc] init];
     rgb = [[GPUImageRGBFilter alloc] init];
     
-    pipeline = [[GPUImageFilterPipeline alloc] initWithOrderedFilters:@[brightness, contrast, saturation, whiteBalance, hightlightShadow, rgb] input:sourcePicture output:self.imageView];
+    leftEyeBulge = [[GPUImageBulgeDistortionFilter alloc] init];
+    leftEyeBulge.center = CGPointMake(1.0, 1.0);
+    leftEyeBulge.radius = 0.2;
+    leftEyeBulge.scale = 0.0;
+    
+    rightEyeBulge = [[GPUImageBulgeDistortionFilter alloc] init];
+    rightEyeBulge.center = CGPointMake(1.0, 1.0);
+    rightEyeBulge.radius = 0.2;
+    rightEyeBulge.scale = 0.0;
+
+    
+    pipeline = [[GPUImageFilterPipeline alloc] initWithOrderedFilters:@[brightness, contrast, saturation, whiteBalance, hightlightShadow, rgb, leftEyeBulge, rightEyeBulge] input:sourcePicture output:self.imageView];
 //    [sourcePicture addTarget:pipeline.output]; // 加上这段话 编辑的时候闪烁
     
     __weak typeof(&*sourcePicture)weakSource = sourcePicture;
@@ -255,19 +313,19 @@
 }
 
 - (void)choosePhoto {
-    TZImagePickerController *controller = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:nil];
-    controller.allowPickingVideo = NO;
-    controller.allowPickingGif = NO;
-    __weak typeof(&*self)weakSelf = self;
-    [controller setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos,NSArray *assets,BOOL isSelectOriginalPhoto){
-        weakSelf.photo = photos.firstObject;
-        [[GPUImageContext sharedImageProcessingContext].framebufferCache purgeAllUnassignedFramebuffers];
-        weakSelf.containView.image = photos.firstObject;
-        [weakSelf layoutSubView];
-        [weakSelf setupFilters];
-        [weakSelf resetFilter];
-    }];
-    [self.navigationController presentViewController:controller animated:YES completion:nil];
+//    TZImagePickerController *controller = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:nil];
+//    controller.allowPickingVideo = NO;
+//    controller.allowPickingGif = NO;
+//    __weak typeof(&*self)weakSelf = self;
+//    [controller setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos,NSArray *assets,BOOL isSelectOriginalPhoto){
+//        weakSelf.photo = photos.firstObject;
+//        [[GPUImageContext sharedImageProcessingContext].framebufferCache purgeAllUnassignedFramebuffers];
+//        weakSelf.containView.image = photos.firstObject;
+//        [weakSelf layoutSubView];
+//        [weakSelf setupFilters];
+//        [weakSelf resetFilter];
+//    }];
+//    [self.navigationController presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)saveImage {
@@ -339,6 +397,11 @@
         case 5:
             // 阴影
             hightlightShadow.shadows = self.slider.value / 100.0;
+            break;
+        case 8:
+            // 大眼
+            leftEyeBulge.scale = self.slider.value / 100.0;
+            rightEyeBulge.scale = self.slider.value / 100.0;
             break;
         default:
             break;
@@ -475,6 +538,12 @@
             self.slider.minimumValue = 0.0;
             self.slider.maximumValue = 100.0;
             break;
+        case 8:
+            // 大眼
+            self.slider.value = leftEyeBulge.scale * 100.0;
+            self.slider.minimumValue = 0.0;
+            self.slider.maximumValue = 100.0;
+            break;
         default:
             break;
     }
@@ -536,4 +605,67 @@
     controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:controller animated:YES completion:nil];
 }
+
+#pragma mark - IFlyFaceRequestDelegate
+
+
+/**
+ * 消息回调
+ * @param eventType 消息类型
+ * @param params 消息数据对象
+ */
+- (void) onEvent:(int) eventType WithBundle:(NSString*) params{
+    NSLog(@"onEvent | params:%@",params);
+}
+
+/**
+ * 数据回调，可能调用多次，也可能一次不调用
+ */
+- (void)onData:(NSData* )data{
+    NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if (result) {
+        NSArray *faces = [[result objectFromJSONString] valueForKey:@"result"];
+        self.faceModel = [TNFaceModel instanceWithInfo:faces.firstObject];
+    }
+    if (self.faceModel) {
+        // 人脸识别
+        CGPoint leftRealPoint = CGPointMake((self.faceModel.left_eye_center.x / self.photo.size.width) * CGRectGetWidth(self.imageView.frame), (self.faceModel.left_eye_center.y / self.photo.size.height) * CGRectGetHeight(self.imageView.frame));
+        CGPoint rightRealPoint = CGPointMake((self.faceModel.right_eye_center.x / self.photo.size.width) * CGRectGetWidth(self.imageView.frame), (self.faceModel.right_eye_center.y / self.photo.size.height) * CGRectGetHeight(self.imageView.frame));
+        
+        CGPoint leftRelativePoint = [self.imageView convertPoint:leftRealPoint toView:self.borderView];
+        CGPoint rightRelativePoint = [self.imageView convertPoint:rightRealPoint toView:self.borderView];
+
+        leftEyeBulge.center = CGPointMake(leftRelativePoint.x / CGRectGetWidth(self.borderView.frame), leftRelativePoint.y / CGRectGetWidth(self.borderView.frame));
+        rightEyeBulge.center = CGPointMake(rightRelativePoint.x / CGRectGetWidth(self.borderView.frame), rightRelativePoint.y / CGRectGetWidth(self.borderView.frame));
+        
+        
+        UILabel *leftEye = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 10.0, 10.0)];
+        leftEye.layer.cornerRadius = 5.0;
+        leftEye.layer.masksToBounds = YES;
+        leftEye.backgroundColor = [UIColor greenColor];
+        leftEye.center = leftRealPoint;
+        [self.imageView addSubview:leftEye];
+        
+        UILabel *rightEye = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 10.0, 10.0)];
+        rightEye.layer.cornerRadius = 5.0;
+        rightEye.layer.masksToBounds = YES;
+        rightEye.backgroundColor = [UIColor redColor];
+        rightEye.center = rightRealPoint;
+        [self.imageView addSubview:rightEye];
+    }
+}
+
+- (void)onCompleted:(IFlySpeechError*) error {
+    if (error) {
+        [SVProgressHUD showErrorWithStatus:error.errorDesc];
+        [self performSelector:@selector(dismissProgress) withObject:nil afterDelay:0.5];
+    } else {
+        [self dismissProgress];
+    }
+}
+
+- (void)dismissProgress {
+    [SVProgressHUD dismiss];
+}
+
 @end

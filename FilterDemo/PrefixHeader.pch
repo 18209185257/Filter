@@ -1,0 +1,13 @@
+//
+//  PrefixHeader.pch
+//  FilterDemo
+//
+//  Created by zhangheng on 2017/5/12.
+//  Copyright © 2017年 zhangheng. All rights reserved.
+//
+
+#define USER_APPID           @"5907f8c4"
+
+#import "UIImage+compress.h"
+#import "UIImage+Extensions.h"
+#import <JSONKit.h>

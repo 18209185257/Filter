@@ -258,13 +258,11 @@
     UIGraphicsBeginImageContext(newRect.size);
     
     CGContextRef c = UIGraphicsGetCurrentContext();
-//    CGContextTranslateCTM (c, ty/2, tx/2);
+
     CGContextRotateCTM(c, M_PI/2);
-//    CGContextTranslateCTM (c, -tx/2, -ty/2);
     
     [self.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *textImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
     return textImage;
 }
 

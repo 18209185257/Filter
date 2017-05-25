@@ -358,7 +358,6 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 
 #pragma mark - tool
-
 - (void)updateAccelertionData:(CMAcceleration)acceleration{
     UIInterfaceOrientation orientationNew;
     

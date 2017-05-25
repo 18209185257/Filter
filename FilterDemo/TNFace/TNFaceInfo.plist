@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Mouth</key>
+	<array>
+		<dict>
+			<key>height</key>
+			<integer>400</integer>
+			<key>width</key>
+			<string>202</string>
+		</dict>
+	</array>
+	<key>Eye</key>
+	<array>
+		<dict>
+			<key>height</key>
+			<integer>102</integer>
+			<key>width</key>
+			<integer>499</integer>
+			<key>right_eye</key>
+			<integer>430</integer>
+			<key>left_eye</key>
+			<integer>120</integer>
+			<key>name</key>
+			<string>eye_despise</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+#import <CoreMedia/CoreMedia.h>
 #import "IFlyFaceImage.h"
-#import <GPUImage.h>
 
 @interface TNFaceTools : NSObject
-+ (IFlyFaceImage *) faceImageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer camera:(GPUImageVideoCamera *)camera;
++ (IFlyFaceImage *)faceImageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer cameraPosition:(AVCaptureDevicePosition)cameraPosition deviceOrientation:(UIDeviceOrientation)deviceOrientation;
 @end
